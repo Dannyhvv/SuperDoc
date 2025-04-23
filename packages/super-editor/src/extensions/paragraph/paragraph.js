@@ -32,7 +32,7 @@ export const Paragraph = Node.create({
       },
       extraAttrs: {
         default: {},
-        parseHTML: (element) => {
+        parseDOM: (element) => {
           const extra = {};
           Array.from(element.attributes).forEach((attr) => {
             extra[attr.name] = attr.value;

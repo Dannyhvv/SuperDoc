@@ -88,6 +88,8 @@ export function exportSchemaToJson(params) {
     commentRangeStart: () => translateCommentNode(params, 'Start'),
     commentRangeEnd: () => translateCommentNode(params, 'End'),
     commentReference: () => null,
+    shapeContainer: translateShapeContainer,
+    shapeTextbox: translateShapeTextbox,
   };
 
   if (!router[type]) {
@@ -1755,6 +1757,67 @@ export function translateHardBreak() {
       attributes: { 'w:type': 'page' }
     }]
   };
+}
+
+function translateShapeContainer(params) {
+  const { node } = params;
+  const elements = translateChildNodes(params);
+
+  console.log(node.attrs);
+
+  const shape = {
+    name: 'v:shape',
+    attributes: {
+      ...node.attrs.attributes,
+      fillcolor: node.attrs.fillcolor,
+    },
+    elements: [
+      ...elements,
+      ...(
+        node.attrs.wrapAttributes
+        ? [{
+            name: 'w10:wrap',
+            attributes: { ...node.attrs.wrapAttributes },
+          }] 
+        : []
+      ),
+    ],
+  };
+
+  const pict = {
+    name: 'w:pict',
+    attributes: {
+      'w14:anchorId':  Math.floor(Math.random() * 0xffffffff).toString(),
+    },
+    elements: [shape],
+  };
+
+  const par = {
+    name: 'w:p',
+    elements: [wrapTextInRun(pict)],
+  };
+  
+  return par;
+}
+
+function translateShapeTextbox(params) {
+  const { node } = params;
+  const elements = translateChildNodes(params);
+
+  const textboxContent = {
+    name: 'w:txbxContent',
+    elements,
+  };
+
+  const textbox = {
+    name: 'v:textbox',
+    attributes: {
+      ...node.attrs.attributes,
+    },
+    elements: [textboxContent],
+  };
+
+  return textbox;
 }
 
 export class DocxExporter {

@@ -54,7 +54,7 @@ class SuperConverter {
     { name: 'w:spacing', type: 'lineHeight', mark: 'textStyle', property: 'lineHeight' },
     { name: 'link', type: 'link', mark: 'link', property: 'href' },
     { name: 'w:highlight', type: 'highlight', mark: 'highlight', property: 'color' },
-    // { name: 'w:shd', type: 'highlight', mark: 'highlight', property: 'color'}
+    { name: 'w:shd', type: 'highlight', mark: 'highlight', property: 'color'}
   ];
 
   static propertyTypes = Object.freeze({

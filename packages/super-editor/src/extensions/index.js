@@ -33,6 +33,8 @@ import { Image } from './image/index.js';
 import { BookmarkStart } from './bookmarks/index.js';
 import { Mention } from './mention/index.js';
 import { PageNumber, TotalPageCount } from './page-number/index.js';
+import { ShapeContainer } from './shape-container/index.js';
+import { ShapeTextbox } from './shape-textbox/index.js';
 
 // Marks extensions
 import { TextStyle } from './text-style/text-style.js';
@@ -151,6 +153,8 @@ const getStarterExtensions = () => {
     LinkedStyles,
     PageNumber,
     TotalPageCount,
+    ShapeContainer,
+    ShapeTextbox,
   ];
 };
 

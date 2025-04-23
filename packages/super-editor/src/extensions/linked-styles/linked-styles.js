@@ -209,9 +209,9 @@ export const getMarksStyle = (attrs) => {
       case 'underline':
         styles += `text-decoration: underline; `;
         break;
-      case 'highlight':
-        styles += `background-color: ${attr.attrs.color}; `;
-        break;
+      // case 'highlight':
+      //   styles += `background-color: ${attr.attrs.color}; `;
+      //   break;
       case 'textStyle':
         const { fontFamily, fontSize } = attr.attrs;
         styles += `${fontFamily ? `font-family: ${fontFamily};` : ''} ${fontSize ? `font-size: ${fontSize};` : ''}`;

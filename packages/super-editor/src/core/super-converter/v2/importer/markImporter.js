@@ -186,7 +186,8 @@ function getLineHeightValue(attributes) {
 }
 
 function getHighLightValue(attributes) {
-  if (attributes['w:fill']) return `#${attributes['w:fill']}`;
+  const fill = attributes['w:fill'];
+  if (fill && fill !== 'auto') return `#${fill}`;
   if (isValidHexColor(attributes?.['w:val'])) return `#${attributes['w:val']}`;
   return getHexColorFromDocxSystem(attributes?.['w:val']) || null;
 }

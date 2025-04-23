@@ -16,6 +16,7 @@ import { bookmarkNodeHandlerEntity } from './bookmarkNodeImporter.js';
 import { autoPageHandlerEntity, autoTotalPageCountEntity } from './autoPageNumberImporter.js';
 import { tabNodeEntityHandler } from './tabImporter.js';
 import { listHandlerEntity } from './listImporter.js';
+import { pictNodeHandlerEntity } from './pictNodeImporter.js';
 import { importCommentData } from './documentCommentsImporter.js';
 import { getDefaultStyleDefinition } from './paragraphNodeImporter.js';
 import { baseNumbering } from '../exporter/helpers/base-list.definitions.js';
@@ -121,6 +122,7 @@ export const createDocumentJson = (docx, converter, editor) => {
 export const defaultNodeListHandler = () => {
   const entities = [
     runNodeHandlerEntity,
+    pictNodeHandlerEntity,
     paragraphNodeHandlerEntity,
     listHandlerEntity,
     textNodeHandlerEntity,
