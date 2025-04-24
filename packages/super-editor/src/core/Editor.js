@@ -126,6 +126,8 @@ export class Editor extends EventEmitter {
     this.#createSchema();
     this.#createConverter();
     this.#initMedia();
+    this.#initFonts();
+    
 
     this.on('beforeCreate', this.options.onBeforeCreate);
     this.emit('beforeCreate', { editor: this });
@@ -465,6 +467,7 @@ export class Editor extends EventEmitter {
       this.converter = new SuperConverter({
         docx: this.options.content,
         media: this.options.mediaFiles,
+        fonts: this.options.fonts,
         debug: true,
         telemetry: this.options.telemetry,
         fileSource: this.options.fileSource,
@@ -495,6 +498,10 @@ export class Editor extends EventEmitter {
     else {
       this.storage.image.media = Object.fromEntries(mediaMap.entries());
     }
+  }
+
+  #initFonts() {
+    this.converter.getDocumentFonts();
   }
 
   /**
@@ -916,13 +923,13 @@ export class Editor extends EventEmitter {
       this.converter.pageStyles.pageMargins = pageMargins;
       this.initDefaultStyles();
       hasMadeUpdate = true;
-    };
+    }
 
     if (hasMadeUpdate) {
       const newTr = this.view.state.tr;
       newTr.setMeta('forceUpdatePagination', true);
       this.view.dispatch(newTr);
-    };
+    }
   }
 
   /**
@@ -1121,7 +1128,6 @@ export class Editor extends EventEmitter {
     if (!this.options.ydoc) {
       this.#initPagination();
       this.#initComments();
-    };
-    
+    }
   }
 }
